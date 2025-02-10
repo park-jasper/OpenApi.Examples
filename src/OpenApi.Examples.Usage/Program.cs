@@ -51,7 +51,7 @@ app.UseAuthorization();
 var api = app.MapGroup("api");
 api
     .MapGet(
-        "weather",
+        "weather/{city}",
         (string city) =>
         {
             if (string.IsNullOrEmpty(city))

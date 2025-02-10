@@ -5,7 +5,7 @@
     version: 1.0.0
   },
   paths: {
-    /api/weather: {
+    /api/weather/{city}: {
       get: {
         tags: [
           OpenApi.Examples.Usage
@@ -14,7 +14,7 @@
         parameters: [
           {
             name: city,
-            in: query,
+            in: path,
             required: true,
             schema: {
               type: string
@@ -32,6 +32,7 @@
                 examples: {
                   Example Weather Forecast: {
                     value: {
+                      Date: 2025-02-09,
                       TemperatureC: 2,
                       Summary: Clear,
                       TemperatureF: 35

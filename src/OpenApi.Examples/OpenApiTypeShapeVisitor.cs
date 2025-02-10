@@ -27,6 +27,12 @@ public class OpenApiTypeShapeVisitor : TypeShapeVisitor
             return new Func<DateTime, IOpenApiAny>(dt => new OpenApiDate(dt));
         }
 
+        if (objectShape.Type == typeof(DateOnly))
+        {
+            return new Func<DateOnly, IOpenApiAny>(d =>
+                new OpenApiDate(d.ToDateTime(TimeOnly.FromTimeSpan(TimeSpan.Zero))));
+        }
+
         if (objectShape.Type == typeof(bool))
         {
             return new Func<bool, IOpenApiAny>(b => new OpenApiBoolean(b));

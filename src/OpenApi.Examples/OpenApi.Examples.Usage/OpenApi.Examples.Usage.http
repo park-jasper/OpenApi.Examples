@@ -1,0 +1,6 @@
+@OpenApi.Examples.Usage_HostAddress = http://localhost:5073
+
+GET {{OpenApi.Examples.Usage_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

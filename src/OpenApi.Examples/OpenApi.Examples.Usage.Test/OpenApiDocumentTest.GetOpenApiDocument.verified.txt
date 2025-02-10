@@ -1,0 +1,131 @@
+﻿{
+  openapi: 3.0.4,
+  info: {
+    title: OpenApi.Examples.Usage | v1,
+    version: 1.0.0
+  },
+  paths: {
+    /api/weather: {
+      get: {
+        tags: [
+          OpenApi.Examples.Usage
+        ],
+        operationId: Weather,
+        parameters: [
+          {
+            name: city,
+            in: query,
+            required: true,
+            schema: {
+              type: string
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: OK,
+            content: {
+              application/json: {
+                schema: {
+                  $ref: #/components/schemas/WeatherForecast
+                },
+                examples: {
+                  Example Weather Forecast: {
+                    value: {
+                      TemperatureC: 2,
+                      Summary: Clear,
+                      TemperatureF: 35
+                    }
+                  }
+                }
+              }
+            }
+          },
+          400: {
+            description: Bad Request,
+            content: {
+              application/problem+json: {
+                schema: {
+                  $ref: #/components/schemas/ProblemDetails
+                },
+                examples: {
+                  Example Problem: {
+                    value: {
+                      Type: null,
+                      Title: Empty parameter,
+                      Status: 400,
+                      Detail: city,
+                      Instance: null,
+                      Extensions: null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  components: {
+    schemas: {
+      ProblemDetails: {
+        type: object,
+        properties: {
+          type: {
+            type: string,
+            nullable: true
+          },
+          title: {
+            type: string,
+            nullable: true
+          },
+          status: {
+            type: integer,
+            format: int32,
+            nullable: true
+          },
+          detail: {
+            type: string,
+            nullable: true
+          },
+          instance: {
+            type: string,
+            nullable: true
+          }
+        }
+      },
+      WeatherForecast: {
+        required: [
+          date,
+          temperatureC,
+          summary
+        ],
+        type: object,
+        properties: {
+          date: {
+            type: string,
+            format: date
+          },
+          temperatureC: {
+            type: integer,
+            format: int32
+          },
+          summary: {
+            type: string,
+            nullable: true
+          },
+          temperatureF: {
+            type: integer,
+            format: int32
+          }
+        }
+      }
+    }
+  },
+  tags: [
+    {
+      name: OpenApi.Examples.Usage
+    }
+  ]
+}
